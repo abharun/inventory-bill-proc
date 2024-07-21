@@ -1,5 +1,7 @@
 import { DataSource } from "typeorm";
 import dotenv from "dotenv";
+import { InventoryEntity } from "./entities/InventoryEntity";
+import { BillEntity } from "./entities/BillEntity";
 
 dotenv.config();
 
@@ -10,7 +12,7 @@ export const dbHandler: DataSource = new DataSource({
   username: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_DBNAME,
-  entities: [],
+  entities: [InventoryEntity, BillEntity],
   synchronize: true,
   logging: false,
 });

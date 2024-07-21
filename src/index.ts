@@ -1,6 +1,6 @@
 import { MESSAGES } from "consts";
 import cors from "cors";
-import { dbHandler } from "database/config";
+import { dbHandler } from "database";
 import dotenv from "dotenv";
 import express, { NextFunction } from "express";
 import { Logger } from "utils";
