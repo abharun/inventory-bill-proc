@@ -14,15 +14,18 @@ export class InventoryEntity {
   @Column({ name: "amount", type: "int" })
   amount: number;
 
-  @Column({ name: "last_incoming_amount", type: "int" })
+  @Column({ name: "last_incoming_amount", type: "int", nullable: true })
   last_incoming_amount: number;
 
-  @Column({ name: "last_incoming_date", type: "timestamp" })
+  @Column({ name: "last_incoming_date", type: "timestamp", nullable: true })
   last_incoming_date: Date;
 
-  @Column({ name: "last_outgoing_amount", type: "int" })
+  @Column({ name: "last_outgoing_amount", type: "int", nullable: true })
   last_outgoing_amount: number;
 
-  @Column({ name: "last_outgoing_date", type: "timestamp" })
+  @Column({ name: "last_outgoing_date", type: "timestamp", nullable: true })
   last_outgoing_date: Date;
+
+  @Column({ name: "last_edited", type: "timestamp" })
+  last_edited: Date;
 }

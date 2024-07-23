@@ -3,6 +3,7 @@ import cors from "cors";
 import { dbHandler } from "database";
 import dotenv from "dotenv";
 import express, { NextFunction } from "express";
+import { appRouter } from "routes";
 import { Logger } from "utils";
 
 dotenv.config();
@@ -12,7 +13,8 @@ const app = express();
 app
   .use(cors())
   .use(express.json())
-  .use("/health", (_req, res) => res.send("OK"));
+  .use("/health", (_req, res) => res.send("OK"))
+  .use(appRouter);
 
 const dbConnect = (next: NextFunction) => {
   try {
