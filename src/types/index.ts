@@ -21,7 +21,7 @@ export interface Inventory {
 
 export interface Bill {
   items: Item[];
-  tprice: number;
+  total_price: number;
   status: BillStatus;
   order_date: Date;
   proc_date?: Date;

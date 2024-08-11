@@ -25,11 +25,12 @@ export const create_bill = async (req: Request, res: Response) => {
   }
   const new_bill: Bill = {
     items: items,
-    tprice: total_price,
+    total_price: total_price,
     status: BillStatus.pending,
     order_date: new Date(),
   };
   const result = await BillService.insert_bill(new_bill);
+  return res.status(200).send(result);
 };
 
 export const pay_bill = async (req: Request, res: Response) => {

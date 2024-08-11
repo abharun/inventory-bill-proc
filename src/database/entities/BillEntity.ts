@@ -6,7 +6,7 @@ export class BillEntity {
   @PrimaryGeneratedColumn({ name: "id" })
   id: number;
 
-  @Column({ name: "items", type: "jsonb", array: true })
+  @Column({ name: "items", type: "jsonb" })
   items: Item[];
 
   @Column({ name: "total_price", type: "float" })
