@@ -1,6 +1,6 @@
 import { dbHandler } from "database";
 import { InventoryEntity } from "database/entities/InventoryEntity";
-import { Inventory } from "types";
+import { Inventory, Item } from "types";
 
 export const get_all = async () => {
   return await dbHandler.getRepository(InventoryEntity).find();
@@ -42,6 +42,38 @@ export const edit_inventory_price = async (id: number, price: number) => {
     .set({ price: price, last_edited: new Date() })
     .where("id = :id", { id })
     .execute();
+};
+
+export const get_inventory_price = async (name: string) => {
+  const inventory = await dbHandler
+    .getRepository(InventoryEntity)
+    .createQueryBuilder("inventory")
+    .select(["inventory.price"])
+    .where("name = :name", { name: name })
+    .getOne();
+  return inventory.price;
+};
+
+export const subtract_items = async (items: Item[]) => {
+  for (let item of items) {
+    const inventory = await dbHandler
+      .getRepository(InventoryEntity)
+      .createQueryBuilder("inventory")
+      .select(["inventory.amount"])
+      .where("name = :name", { name: item.name })
+      .getOne();
+    const new_amount = inventory.amount - item.amount;
+    await dbHandler
+      .createQueryBuilder()
+      .update(InventoryEntity)
+      .set({
+        amount: new_amount,
+        last_outgoing_amount: item.amount,
+        last_outgoing_date: new Date(),
+      })
+      .where("name = :name", { name: item.name })
+      .execute();
+  }
 };
 
 export const delete_inventory = async (id: number) => {

@@ -1,6 +1,6 @@
 export interface Item {
   name: string;
-  prince: number;
+  amount: number;
 }
 
 export enum BillStatus {
@@ -17,4 +17,12 @@ export interface Inventory {
   last_outgoing_amount?: number;
   last_outgoing_date?: Date;
   last_edited: Date;
+}
+
+export interface Bill {
+  items: Item[];
+  tprice: number;
+  status: BillStatus;
+  order_date: Date;
+  proc_date?: Date;
 }
