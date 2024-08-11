@@ -55,6 +55,7 @@ export const get_inventory_price = async (name: string) => {
 };
 
 export const subtract_items = async (items: Item[]) => {
+  const outgoing_time = new Date();
   for (let item of items) {
     const inventory = await dbHandler
       .getRepository(InventoryEntity)
@@ -69,7 +70,7 @@ export const subtract_items = async (items: Item[]) => {
       .set({
         amount: new_amount,
         last_outgoing_amount: item.amount,
-        last_outgoing_date: new Date(),
+        last_outgoing_date: outgoing_time,
       })
       .where("name = :name", { name: item.name })
       .execute();
